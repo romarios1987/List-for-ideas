@@ -1,0 +1,20 @@
+{
+  "name": "List-for-ideas",
+  "version": "1.0.0",
+  "description": "Node.js, Express &amp; MongoDB Dev to Deployment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romarios1987/List-for-ideas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romarios1987/List-for-ideas/issues"
+  },
+  "homepage": "https://github.com/romarios1987/List-for-ideas#readme"
+}
