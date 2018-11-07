@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/romarios1987/List-for-ideas/issues"
   },
-  "homepage": "https://github.com/romarios1987/List-for-ideas#readme"
+  "homepage": "https://github.com/romarios1987/List-for-ideas#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
 }
