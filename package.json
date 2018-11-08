@@ -1,5 +1,5 @@
 {
-  "name": "List-for-ideas",
+  "name": "ListForIdeas",
   "version": "1.0.0",
   "description": "Node.js, Express &amp; MongoDB Dev to Deployment",
   "main": "app.js",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/romarios1987/List-for-ideas#readme",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0"
   }
 }
