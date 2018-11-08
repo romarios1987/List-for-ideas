@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/romarios1987/List-for-ideas#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
