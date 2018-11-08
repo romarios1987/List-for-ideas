@@ -15,7 +15,7 @@ app.set('view engine', 'ejs'); //extension of views
 
 // Index Route
 app.get('/', (req, res) => {
-    res.render('index', {title: 'Express'});
+    res.render('index', {title: 'Welcome'});
 });
 
 // About Route
