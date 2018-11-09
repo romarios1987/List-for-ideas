@@ -9,6 +9,9 @@
                         <span><%= idea.date.getDate() + '/' + idea.date.getMonth() + '/' + idea.date.getFullYear() %></span>
                     </div>
                     <div class="card-body"><%= idea.details %></div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" href="/ideas/edit/<%= idea.id %>">Edit</a>
+                    </div>
                 </div>
             </div>
         <% } %>

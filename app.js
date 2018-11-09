@@ -1,5 +1,6 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const methodOverride = require('method-override')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -26,6 +27,9 @@ app.set('view engine', 'ejs'); //extension of views
 // Body Parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Method override middleware
+app.use(methodOverride('_method'))
 
 
 // Index Route
@@ -55,7 +59,19 @@ app.get('/ideas/add', (req, res) => {
     res.render('ideas/add');
 });
 
-// Process Form
+// Edit Idea Form
+app.get('/ideas/edit/:id', (req, res) => {
+    Idea.findOne({
+        _id: req.params.id
+    })
+        .then(idea => {
+            res.render('ideas/edit', {idea: idea});
+        });
+
+});
+
+
+// Add Form Process
 app.post('/ideas', (req, res) => {
 
     let errors = [];
@@ -90,6 +106,25 @@ app.post('/ideas', (req, res) => {
 
     // console.log(req.body);
     // res.send('OK');
+});
+
+
+// Edit Form Process
+app.put('/ideas/:id', (req, res) => {
+    Idea.findOne({
+        _id: req.params.id
+    })
+        .then(idea => {
+            // new values
+            idea.title = req.body.title;
+            idea.details = req.body.details;
+
+            idea.save()
+                .then(idea => {
+                    res.redirect('/ideas');
+                })
+        })
+    //res.send('PUT');
 });
 
 
