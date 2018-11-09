@@ -1,0 +1,18 @@
+<h1>Ideas</h1>
+<div class="row">
+    <% if (ideas.length > 0) { %>
+        <% for (idea of ideas) { %>
+            <div class="col-6">
+                <div class="card mb-4">
+                    <div class="card-header text-white bg-dark">
+                        <h4><%= idea.title %> </h4>
+                        <span><%= idea.date.getDate() + '/' + idea.date.getMonth() + '/' + idea.date.getFullYear() %></span>
+                    </div>
+                    <div class="card-body"><%= idea.details %></div>
+                </div>
+            </div>
+        <% } %>
+    <% }else { %>
+        <p class="text-center">No ideas</p>
+    <% } %>
+</div>
