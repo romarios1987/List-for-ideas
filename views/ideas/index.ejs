@@ -9,8 +9,14 @@
                         <span><%= idea.date.getDate() + '/' + idea.date.getMonth() + '/' + idea.date.getFullYear() %></span>
                     </div>
                     <div class="card-body"><%= idea.details %></div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-around">
                         <a class="btn btn-warning" href="/ideas/edit/<%= idea.id %>">Edit</a>
+
+                        <form action="/ideas/<%= idea.id %>?_method=DELETE" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+
                     </div>
                 </div>
             </div>
