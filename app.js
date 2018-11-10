@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
@@ -29,6 +30,10 @@ app.set('view engine', 'ejs'); //extension of views
 // Body Parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+
+// Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Method override middleware
