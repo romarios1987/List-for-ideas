@@ -1,13 +1,10 @@
-<% if ( success_msg.length > 0 ) { %>
-    <div class="alert alert-success"><%= success_msg %></div>
-<% } %>
-
-<% if ( error_msg.length > 0 ) { %>
-    <div class="alert alert-danger"><%= error_msg %></div>
-<% } %>
-
-
-
-
-
+<div id="messages">
+    <% Object.keys(messages).forEach(function (type) { %>
+        <ul class="<%= type %>">
+            <% messages[type].forEach(function (message) { %>
+                <li><%= message %></li>
+            <% }) %>
+        </ul>
+    <% }) %>
+</div>
 

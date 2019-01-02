@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
-// Create Schema
+// Create IdeaSchema
 const IdeaSchema = new Schema({
     title: {
         type: String,
@@ -18,4 +17,7 @@ const IdeaSchema = new Schema({
     }
 });
 
-mongoose.model('ideas', IdeaSchema);
+//mongoose.model('ideas', IdeaSchema);
+
+module.exports = Idea = mongoose.model('ideas', IdeaSchema);
+
