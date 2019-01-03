@@ -1,0 +1,27 @@
+<h1>Ideas</h1>
+<div class="row">
+    <% if (ideas.length > 0) { %>
+        <% for (idea of ideas) {
+            const {title, date, details, id} = idea;
+        %>
+        <div class="col-6">
+            <div class="card mb-4">
+                <div class="card-header text-white bg-dark">
+                    <h4><%= title %> </h4>
+                    <span><%= formatDate(date) %></span>
+                </div>
+                <div class="card-body"><%= details %></div>
+                <div class="card-footer d-flex justify-content-around">
+                    <a class="btn btn-warning" href="/ideas/edit/<%= id %>">Edit</a>
+                    <form action="/ideas/<%= id %>?_method=DELETE" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    <% }else { %>
+        <p class="text-center">No ideas</p>
+    <% } %>
+</div>
