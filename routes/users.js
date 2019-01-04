@@ -5,29 +5,16 @@ const passport = require('passport');
 const router = express.Router();
 
 
-// Load User Model
-require('../models/User');
-//const User = mongoose.model('users');
-
-// User Login Route
-router.get('/login', (req, res) => {
-    res.render('users/login');
-});
+// User Model
+const User = require('../models/User');
 
 
-// User Register Route
-router.get('/register', (req, res) => {
-    res.render('users/register');
+// Login Page
+router.get('/login', (req, res) => res.render('users/login'));
 
-    // res.render('users/register',{
-    //     errors: {}
-    // });
+// Register Page
+router.get('/register', (req, res) => res.render('users/register'));
 
-    // res.render('users/register', {
-    //     data: {},
-    //     errors: {}
-    // })
-});
 
 
 // Login Form POST

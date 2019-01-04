@@ -17,7 +17,6 @@ const IdeaSchema = new Schema({
     }
 });
 
-//mongoose.model('ideas', IdeaSchema);
+module.exports = mongoose.model('ideas', IdeaSchema);
 
-module.exports = Idea = mongoose.model('ideas', IdeaSchema);
 

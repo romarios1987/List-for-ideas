@@ -1,12 +1,5 @@
 const express = require('express');
-// const mongoose = require('mongoose');
 const router = express.Router();
-//const { check, validationResult } = require('express-validator/check');
-
-
-// // Load Idea Modal
-// require('../models/Idea');
-// const Idea = mongoose.model('ideas');
 
 // User Model
 const Idea = require('../models/Idea');
@@ -24,7 +17,6 @@ function formatDate(date) {
     return day + '/' + month + '/' + year;
 }
 
-//
 /**
  * Idea Index Page GET
  */
@@ -137,91 +129,5 @@ router.delete('/:id', (req, res) => {
             res.redirect('/ideas');
         })
 });
-
-
-// Add Form Process
-
-// router.post('/add',
-//     [
-//         check('title').isLength({min: 1}).trim().withMessage('Title required'),
-//         check('details').isLength({min: 1}).trim().withMessage('details required')
-//     ],
-//     (req, res, next) => {
-//
-//         let article = new Idea(req.body);
-//
-//
-//
-//         const errors = validationResult(req);
-//         console.log(errors);
-//
-//         if (!errors.isEmpty()) {
-//            // console.log(errors);
-//             res.render('ideas/add',
-//                 {
-//                     article: article,
-//                     errors: errors.mapped()
-//                 });
-//         }
-//         else {
-//             article.save()
-//                 .then(() => {
-//                     req.flash('info', 'Idea has been added');
-//                     res.redirect('ideas/add');
-//                 })
-//                 .catch(err => console.log(err));
-//         }
-//     });
-
-
-// router.post('/', (req, res) => {
-//
-//     new Idea(req.body).save()
-//         .then(() => {
-//             req.flash('info', 'Idea has been added');
-//             res.redirect('/ideas');
-//         })
-//         .catch(err => console.log(err));
-//         // .catch(() => {
-//         //     res.status(400).send("unable to save to database");
-//         // });
-//
-//     //let errors = [];
-//
-//     // if (!req.body.title) {
-//     //     errors.push({text: 'Please add title'})
-//     // }
-//     //
-//     // if (!req.body.details) {
-//     //     errors.push({text: 'Please add some details'})
-//     // }
-//
-//     // if (errors.length > 0) {
-//     //     res.render('ideas/add', {
-//     //         errors: errors,
-//     //         title: req.body.title,
-//     //         details: req.body.details,
-//     //     })
-//     // } else {
-//         // saving idea to mongoDb
-//
-//         // Idea.title =  req.body.title;
-//         // Idea.details = req.body.details;
-//         //
-//         // Idea.save(function(err){
-//         //     if(err){
-//         //         console.log(err);
-//         //         return;
-//         //     }else {
-//         //         req.flash('success', 'Idea has been added');
-//         //         res.redirect('/ideas');
-//         //     }
-//         // })
-//     // }
-//
-//     // console.log(req.body);
-//     // res.send('OK');
-// });
-
 
 module.exports = router;

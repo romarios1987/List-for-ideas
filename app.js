@@ -10,11 +10,6 @@ const flash = require('connect-flash');
 const session = require('express-session');
 
 
-
-
-//const expressValidator = require('express-validator');
-//const session = require('express-session');
-
 //const passport = require('passport');
 
 
@@ -43,8 +38,6 @@ app.use(expressLayouts);
 // Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // Express session middleware
 app.use(session({
     secret: 'secret',
@@ -62,93 +55,10 @@ app.use((req, res, next) => {
     next();
 });
 
-
-// function compileEjsTemplate(name, template) {
-//     const compiledTemplate = ejs.compile(template, {
-//         client: true,
-//         outputFunctionName: name
-//     });
-//     return function compileEjsTemplate(req, res, next) {
-//         res.locals.compiledEjsTemplates = res.locals.compiledEjsTemplates || {};
-//         res.locals.compiledEjsTemplates[name] = compiledTemplate.toString();
-//         return next();
-//     };
-// }
-
-
-// Passport config
-//require('./config/passport')(passport);
-
-// Map global promise - Get rid of warning
-mongoose.Promise = global.Promise;
-
-
 // Connect to Mongo
 mongoose.connect(db, {useNewUrlParser: true})
     .then(() => console.log(`MongoDB Connected...`))
     .catch(err => console.log(err));
-
-
-
-// Load Idea model
-//require('./models/Idea');
-//const Idea = mongoose.model('ideas');
-
-
-
-
-// Express Session Middleware
-// app.use(session({
-//     secret: 'secret',
-//     resave: true,
-//     saveUninitialized: true
-// }));
-
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true,
-// }));
-
-
-// Express Messages Middleware
-// app.use(require('connect-flash')());
-// app.use(function (req, res, next) {
-//     res.locals.messages = require('express-messages')(req, res);
-//     next();
-// });
-
-
-// Global variables
-// app.use(function (req, res, next) {
-//     res.locals.success_msg = req.flash('success_msg');
-//     res.locals.error_msg = req.flash('error_msg');
-//     res.locals.error = req.flash('error');
-//     next();
-// });
-
-
-// Express Validator Middleware
-// app.use(expressValidator({
-//     errorFormatter: function(param, msg, value) {
-//         let namespace = param.split('.')
-//             , root    = namespace.shift()
-//             , formParam = root;
-//
-//         while(namespace.length) {
-//             formParam += '[' + namespace.shift() + ']';
-//         }
-//         return {
-//             param : formParam,
-//             msg   : msg,
-//             value : value
-//         };
-//     }
-// }));
-
-
-
-
 
 // Index Route
 app.get('/', (req, res) => {
@@ -159,7 +69,7 @@ app.get('/', (req, res) => {
 
 // About Route
 app.get('/about', (req, res) => {
-    const title = 'About Page'
+    const title = 'About Page';
     res.render('about', {title});
 });
 
