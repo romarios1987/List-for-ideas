@@ -30,7 +30,6 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-
 /**
  * Register Form POST
  */
@@ -43,6 +42,7 @@ router.post('/register', (req, res) => {
     // Check required fields
     if (!name || !email || !password || !password_confirm) {
         errors.push({msg: 'Please fill in all fields'});
+        res.redirect('/users/register')
     }
 
     if (password !== password_confirm) {
