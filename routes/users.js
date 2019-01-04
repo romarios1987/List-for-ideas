@@ -9,12 +9,15 @@ const router = express.Router();
 const User = require('../models/User');
 
 
-// Login Page
+/**
+ * Login Page
+ */
 router.get('/login', (req, res) => res.render('users/login'));
 
-// Register Page
+/**
+ * Register Page
+ */
 router.get('/register', (req, res) => res.render('users/register'));
-
 
 
 // Login Form POST
@@ -27,125 +30,71 @@ router.get('/register', (req, res) => res.render('users/register'));
 // });
 
 
-// Register Form POST
+/**
+ * Register Form POST
+ */
 router.post('/register', (req, res) => {
-
 
         let errors = [];
 
-        if(req.body.password !== req.body.password_confirm){
-            errors.push({text:'Passwords do not match'});
+        const {name, email, password, password_confirm} = req.body;
+
+        // Check required fields
+        if (!name || !email || !password || !password_confirm) {
+            errors.push({msg: 'Please fill in all fields'});
         }
 
-        if(req.body.password.length < 4){
-            errors.push({text:'Password must be least 4 characters'});
+        if (password !== password_confirm) {
+            errors.push({msg: 'Passwords do not match'});
         }
 
-        if(errors.length > 0){
-            res.render('users/register',{
-                errors:errors,
-                name:req.body.name,
-                email:req.body.email,
-                password: req.body.password,
-                password_confirm: req.body.password_confirm,
-                sss: console.log(errors)
+        if (req.body.password.length < 6) {
+            errors.push({msg: 'Password must be least 6 characters'});
+        }
+
+        if (errors.length > 0) {
+            res.render('users/register', {
+                errors,
+                name,
+                email,
+                password,
+                password_confirm,
             });
+        } else {
+            // Validation passed
+            User.findOne({email: email})
+                .then(user => {
+                    if (user) {
+                        // User exists
+                        req.flash('error_msg', 'Email is already registered');
+                        res.redirect('/users/register')
+                    } else {
+                        const newUser = new User({
+                            name,
+                            email,
+                            password
+                        });
 
-        }else {
-            res.send('passed');
+                        // Hash password
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                                if (err) throw err;
+
+                                // set password to hashed
+                                newUser.password = hash;
+
+                                // Save User
+                                newUser.save()
+                                    .then(() => {
+                                        req.flash('success_msg', 'You are now registered and can  log in');
+                                        res.redirect('/users/login');
+                                    })
+                                    .catch(err => console.log(err))
+                            })
+                        })
+                    }
+                })
         }
-
-
-
-
-        // if(req.body.password.length < 6){
-        //     this.errors.res.body.password = {msg: 'Password must be least 6 characters'}
-        // }
-
-
-        // res.render('users/register', {
-        //     data: {
-        //         name: req.body.name,
-        //         email: req.body.email
-        //     },
-        //     errors: {
-        //         name: {
-        //             msg: 'A name is required'
-        //         },
-        //         email: {
-        //             msg: 'That email doesn‘t look right'
-        //         }
-        //     }
-        //
-        // })
-
-
-        //console.log(req.body);
-        // let errors = [];
-
-        // if (req.body.password !== req.body.password_confirm) {
-        //     this.errors.name = 'Passwords do not match'
-        // }
-
-        // if (req.body.password.length < 6) {
-        //     errors.push({text: 'Password must be least 6 characters'})
-        // }
-// if (errors.length > 0) {
-//             res.render('users/register', {
-//                 name: req.body.name,
-//                 errors: this.errors,
-//             });
-        // }else {
-        //     res.send('passed')
-        // }
-
-        // let errors = [];
-        //
-        // if (req.body.password !== req.body.password2) {
-        //     errors.push({text: 'Passwords do not match'})
-        // }
-        // if (req.body.password.length < 6) {
-        //     errors.push({text: 'Password must be least 6 characters'})
-        // }
-        //
-        // if (errors.length > 0) {
-        //     res.render('users/register', {
-        //         errors: errors,
-        //         name: req.body.name,
-        //         email: req.body.email,
-        //         password: req.body.password,
-        //         password2: req.body.password2
-        //     });
-        // } else {
-        //     User.findOne({email: req.body.email})
-        //         .then(user => {
-        //             if (user) {
-        //                 req.flash('error_msg', 'Email already registered');
-        //                 res.redirect('/users/register')
-        //             } else {
-        //                 const newUser = new User({
-        //                     name: req.body.name,
-        //                     email: req.body.email,
-        //                     password: req.body.password
-        //                 });
-        //                 bcrypt.genSalt(10, (err, salt) => {
-        //                     bcrypt.hash(newUser.password, salt, (err, hash) => {
-        //                         if (err) throw err;
-        //                         newUser.password = hash;
-        //                         newUser.save()
-        //                             .then(user => {
-        //                                 req.flash('success_msg', 'You are now registered and can log in');
-        //                                 res.redirect('/users/login');
-        //                             })
-        //                             .catch(err => {
-        //                                 console.log(err);
-        //                                 return;
-        //                             });
-        //                     });
-        //                 })
-        //             }
-        //         });
-        // }
     }
 );
 
