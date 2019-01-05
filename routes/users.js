@@ -23,6 +23,11 @@ router.get('/register', (req, res) => res.render('users/register'));
  * Login Form POST
  */
 router.post('/login', (req, res, next) => {
+    //console.log(req.body.email);
+    if (!req.body.email || !req.body.password) {
+        req.flash('error_msg', 'Please fill in all fields');
+        res.redirect('/users/login')
+    }
     passport.authenticate('local', {
         successRedirect: '/ideas',
         failureRedirect: '/users/login',
@@ -30,19 +35,17 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+
 /**
  * Register Form POST
  */
 router.post('/register', (req, res) => {
-
-    let errors = [];
-
     const {name, email, password, password_confirm} = req.body;
+    let errors = [];
 
     // Check required fields
     if (!name || !email || !password || !password_confirm) {
         errors.push({msg: 'Please fill in all fields'});
-        res.redirect('/users/register')
     }
 
     if (password !== password_confirm) {
